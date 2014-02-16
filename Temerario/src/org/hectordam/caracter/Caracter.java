@@ -1,5 +1,6 @@
 package org.hectordam.caracter;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -25,15 +26,16 @@ public abstract class Caracter {
 		
 	}
 	
-	public void mover(Vector2 mover){
+	public Caracter(Texture texture, float x, float y, float velocidad) {
 		
-		mover.scl(speed);
-		posicion.add(mover);
-		rect.x = posicion.x;
-		rect.y = posicion.y;
+		currentFrame = new TextureRegion(texture);
+		posicion = new Vector2(x, y);
+		speed = velocidad;
 	}
+	
+	
 
-	public void recder(SpriteBatch batch){
+	public void render(SpriteBatch batch){
 		
 		batch.draw(currentFrame, posicion.x, posicion.y);
 	}
@@ -41,10 +43,17 @@ public abstract class Caracter {
 	public void update(float dt){
 		
 		stateTime += dt;
-		currentFrame = animacion.getKeyFrame(stateTime, true);
+		if(animacion != null){
+			currentFrame = animacion.getKeyFrame(stateTime, true);
+		}
+		
 		
 		if(rect == null){
 			rect = new Rectangle(posicion.x, posicion.y, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
+		}
+		else{
+			rect.x = posicion.x;
+			rect.y = posicion.y;
 		}
 		
 	}
