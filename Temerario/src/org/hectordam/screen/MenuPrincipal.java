@@ -26,7 +26,7 @@ public class MenuPrincipal implements Screen{
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		juego.batch.begin();
-		juego.font.draw(juego.batch, "Juego de Frogger", 100, 100);
+		juego.font.draw(juego.batch, "Juego de Temerario", 100, 100);
 		juego.font.draw(juego.batch, "Pulsa 'ENTER' para empezar", 100, 70);
 		juego.font.draw(juego.batch, "Pulsa 'ESCAPE' para salir", 100, 40);
 		juego.batch.end();

@@ -74,6 +74,10 @@ public class Personajes extends Caracter{
 		if ((posicion.x + currentFrame.getRegionWidth()) > 600)
 			posicion.x = 600 - currentFrame.getRegionWidth();
 		
+		if(posicion.y <= 0){
+			posicion.y = 0;
+		}
+		
 		rect.x = posicion.x;
 		rect.y = posicion.y;
 	}
