@@ -31,6 +31,8 @@ public abstract class Caracter {
 		currentFrame = new TextureRegion(texture);
 		posicion = new Vector2(x, y);
 		speed = velocidad;
+		
+		rect = new Rectangle(posicion.x, posicion.y, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
 	}
 	
 	
@@ -47,14 +49,11 @@ public abstract class Caracter {
 			currentFrame = animacion.getKeyFrame(stateTime, true);
 		}
 		
-		
 		if(rect == null){
 			rect = new Rectangle(posicion.x, posicion.y, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
 		}
-		else{
-			rect.x = posicion.x;
-			rect.y = posicion.y;
-		}
+		rect.x = posicion.x;
+		rect.y = posicion.y;
 		
 	}
 	

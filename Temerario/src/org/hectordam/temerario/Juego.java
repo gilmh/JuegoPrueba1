@@ -14,6 +14,10 @@ public class Juego extends Game {
 	public BitmapFont font;
 	OrthographicCamera camera;
 	
+	public int salvados = 0;
+	public int perdidos = 0;
+	public float tiempo = 120;
+	
 	@Override
 	public void create() {		
 		

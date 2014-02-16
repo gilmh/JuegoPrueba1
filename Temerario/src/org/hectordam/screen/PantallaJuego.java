@@ -24,7 +24,7 @@ public class PantallaJuego implements Screen{
 		
 		ResourceManager.cargarTodosRecursos();
 		
-		spriteManager = new SpriteManager();
+		spriteManager = new SpriteManager(juego);
 		
 		
 	}
@@ -34,12 +34,6 @@ public class PantallaJuego implements Screen{
 		
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-		
-		
-		
-		juego.batch.begin();
-		juego.batch.draw(fondo, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		juego.batch.end();
 		
 		spriteManager.update(dt);
 		spriteManager.render(juego.batch);

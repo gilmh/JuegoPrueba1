@@ -26,12 +26,9 @@ public class MenuPrincipal implements Screen{
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		juego.batch.begin();
-		juego.font.draw(juego.batch, "Juego de Frogger", 
-			100, 100);
-		juego.font.draw(juego.batch, "Pulsa cualquier tecla para empezar", 
-			100, 70);
-		juego.font.draw(juego.batch, "Pulsa ESCAPE para salir", 
-			100, 40);
+		juego.font.draw(juego.batch, "Juego de Frogger", 100, 100);
+		juego.font.draw(juego.batch, "Pulsa 'ENTER' para empezar", 100, 70);
+		juego.font.draw(juego.batch, "Pulsa 'ESCAPE' para salir", 100, 40);
 		juego.batch.end();
 		
 		handleInput();
@@ -43,7 +40,7 @@ public class MenuPrincipal implements Screen{
 			juego.dispose();
 			System.exit(0);
 		}
-		else if (Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
+		else if (Gdx.input.isKeyPressed(Keys.ENTER)) {
 			juego.setScreen(new PantallaJuego(juego));
 		}
 	}
