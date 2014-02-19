@@ -25,6 +25,7 @@ public class GameOver implements Screen{
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		juego.batch.begin();
+		juego.font.draw(juego.batch, "Has conseguido " + juego.puntos + " puntos", 100, 160);
 		juego.font.draw(juego.batch, "Has conseguido salvar " + juego.salvados + " personas", 100, 130);
 		juego.font.draw(juego.batch, "Has perdido " + juego.perdidos + " personas", 100, 100);
 		juego.font.draw(juego.batch, "Pulsa 'ENTER' para volver a jugar", 100, 70);

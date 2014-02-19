@@ -56,5 +56,7 @@ public abstract class Caracter {
 		rect.y = posicion.y;
 		
 	}
+
+	
 	
 }

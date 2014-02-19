@@ -16,7 +16,8 @@ public class Juego extends Game {
 	
 	public int salvados = 0;
 	public int perdidos = 0;
-	public float tiempo = 120;
+	public float tiempo = 90;
+	public int puntos = 0;
 	
 	@Override
 	public void create() {		

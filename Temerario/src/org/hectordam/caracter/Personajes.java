@@ -1,6 +1,7 @@
 package org.hectordam.caracter;
 
 import org.hectordam.manager.ResourceManager;
+import org.hectordam.util.Util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,6 +14,8 @@ public class Personajes extends Caracter{
 	public static enum State{
 		RIGHT, LEFT, UP, DOWN, IDLE
 	}
+	
+	private Util.Tipo tipo;
 	
 	public State state = State.IDLE;
 	
@@ -81,5 +84,19 @@ public class Personajes extends Caracter{
 		rect.x = posicion.x;
 		rect.y = posicion.y;
 	}
+	public float getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
 	
+	public Util.Tipo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Util.Tipo tipo) {
+		this.tipo = tipo;
+	}
 }
