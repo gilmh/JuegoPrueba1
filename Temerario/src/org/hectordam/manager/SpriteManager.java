@@ -131,7 +131,7 @@ public class SpriteManager {
 	
 	private void generarPersonaje(){
 		
-		personaje = new Personajes(new Texture("abajo1.png"), 300 - 16, 50, 100);
+		personaje = new Personajes(new Texture("abajo1.png"), 300 - 16, 10, 100);
 	}
 	
 	private void generarEnemigoAbajo(){
