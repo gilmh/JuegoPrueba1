@@ -26,8 +26,8 @@ public class GameOver implements Screen{
 		
 		juego.batch.begin();
 		juego.font.draw(juego.batch, "Has conseguido " + juego.puntos + " puntos", 100, 160);
-		juego.font.draw(juego.batch, "Has conseguido salvar " + juego.salvados + " personas", 100, 130);
-		juego.font.draw(juego.batch, "Has perdido " + juego.perdidos + " personas", 100, 100);
+		juego.font.draw(juego.batch, "Has conseguido cruzar con " + juego.salvados + " veces", 100, 130);
+		juego.font.draw(juego.batch, "Te han pillado " + juego.perdidos + " veces", 100, 100);
 		juego.font.draw(juego.batch, "Pulsa 'ENTER' para volver a jugar", 100, 70);
 		juego.font.draw(juego.batch, "Pulsa 'ESCAPE' para salir", 100, 40);
 		juego.batch.end();
@@ -43,9 +43,10 @@ public class GameOver implements Screen{
 		}
 		else if (Gdx.input.isKeyPressed(Keys.ENTER)) {
 			
-			juego.tiempo = 120;
+			juego.tiempo = 100;
 			juego.salvados = 0;
 			juego.perdidos = 0;
+			juego.puntos = 0;
 			juego.setScreen(new PantallaJuego(juego));
 		}
 	}

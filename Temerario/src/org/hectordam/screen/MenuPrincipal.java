@@ -7,29 +7,33 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 
 public class MenuPrincipal implements Screen{
 	
 	Juego juego;
 	
+	private Texture fondo;
 	
 	public MenuPrincipal(Juego juego){
 		
 		this.juego = juego;
+		fondo = new Texture(Gdx.files.internal("paramirapasa.png"));
 	}
 
 
 	@Override
 	public void render(float delta) {
 		
-		Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
+		Gdx.gl.glClearColor(0.3f, 0.3f, 0.3f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		juego.batch.begin();
-		juego.font.draw(juego.batch, "Temerario por granvia", 100, 130);
-		juego.font.draw(juego.batch, "Cruza la calle con el mayor numero de personas", 100, 100);
-		juego.font.draw(juego.batch, "Pulsa 'ENTER' para empezar", 100, 70);
-		juego.font.draw(juego.batch, "Pulsa 'ESCAPE' para salir", 100, 40);
+		juego.batch.draw(fondo, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		juego.font.draw(juego.batch, "Temerario por granvia", 25, 60);
+		juego.font.draw(juego.batch, "Cruza la calle con el mayor numero de personas", 25, 40);
+		juego.font.draw(juego.batch, "Pulsa 'ENTER' para empezar", 375, 60);
+		juego.font.draw(juego.batch, "Pulsa 'ESCAPE' para salir", 375, 40);
 		juego.batch.end();
 		
 		handleInput();

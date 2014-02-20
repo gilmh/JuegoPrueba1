@@ -32,7 +32,7 @@ public abstract class Caracter {
 		posicion = new Vector2(x, y);
 		speed = velocidad;
 		
-		rect = new Rectangle(posicion.x, posicion.y, currentFrame.getRegionWidth(), currentFrame.getRegionHeight());
+		rect = new Rectangle(posicion.x+2, posicion.y+2, currentFrame.getRegionWidth()-4, currentFrame.getRegionHeight()-4);
 	}
 	
 	

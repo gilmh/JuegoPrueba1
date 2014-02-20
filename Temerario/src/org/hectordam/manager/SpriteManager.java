@@ -41,7 +41,7 @@ public class SpriteManager {
 	private boolean bonus;
 	
 	Juego juego;
-	Texture fondo;
+	private Texture fondo;
 	
 	public SpriteManager(Juego juego){
 		
@@ -146,14 +146,14 @@ public class SpriteManager {
 		for(Vehiculos vehiculo: vehiculos){
 			if(vehiculo.rect.overlaps(personaje.rect)){
 				juego.perdidos += 1;
-				juego.puntos -= 10;
+				juego.puntos -= 20;
 				generarPersonaje();
 				cont += 1;
 			}
 		}
 		
 		if(personaje.rect.overlaps(objeto.rect) && bonus){
-			
+			juego.puntos += 10;
 			switch(objeto.getTipo()){
 			case RAYO:
 				personaje.setTipo(objeto.getTipo());
@@ -162,7 +162,7 @@ public class SpriteManager {
 				break;
 			case RELOJ:
 				personaje.setTipo(objeto.getTipo());
-				juego.tiempo += 10;
+				juego.tiempo += 15;
 				break;
 			case SEÑAL50:
 				personaje.setTipo(objeto.getTipo());
@@ -206,8 +206,8 @@ public class SpriteManager {
 		
 		int numbonus = (int) (Math.random()*3+1);
 		
-		float posx = (float) (Math.random()*510+20);
-		float posy = (float) (Math.random()*600+130);
+		float posx = (float) (Math.random()*460+50);
+		float posy = (float) (Math.random()*480+130);
 		
 		switch(numbonus){
 		case 1:
@@ -242,13 +242,10 @@ public class SpriteManager {
 			default:
 				break;
 		}
-		
-		
 		bonus = true;
 	}
 	
 	private void generarEnemigoAbajo(){
-		
 		int carril = (int) (Math.random()*3+1);
 		int num = (int) (Math.random()*100+1);
 		
@@ -256,36 +253,38 @@ public class SpriteManager {
 		
 		switch(carril){
 		case 1:
-			if(num < 20){
-				vehiculo = new Vehiculos(new Texture("autobus_derecha.png"), (0f - 64), 120f, velocidad);
-			}
-			else{
-				vehiculo = new Vehiculos(new Texture("coche_derecha.png"), (0f - 32), 120f, velocidad);
-			}
+			vehiculo = rellenarAbajo(num, 120f);
 			break;
-			
 		case 2:
-			if(num < 20){
-				vehiculo = new Vehiculos(new Texture("autobus_derecha.png"), (0f - 64), 180f, velocidad);
-			}
-			else{
-				vehiculo = new Vehiculos(new Texture("coche_derecha.png"), (0f - 32), 180f, velocidad);
-			}
-			break;
-			
+			vehiculo = rellenarAbajo(num, 180f);
+			break;	
 		case 3:
-			if(num < 20){
-				vehiculo = new Vehiculos(new Texture("autobus_derecha.png"), (0f -64), 240f, velocidad);
-			}
-			else{
-				vehiculo = new Vehiculos(new Texture("coche_derecha.png"), (0f - 32), 240f, velocidad);
-			}
+			vehiculo = rellenarAbajo(num, 240f);
 			break;
-		
 		}
-		
 		vehiculos.add(vehiculo);
+	}
+	
+	private Vehiculos rellenarAbajo(int num, float y){
+		Vehiculos vehiculo = null;
 		
+		if(num < 25){
+			vehiculo = new Vehiculos(new Texture("autobus_derecha.png"), (0f - 64), y, velocidad);
+			return vehiculo;
+		}
+		if(num < 50){
+			vehiculo = new Vehiculos(new Texture("Camion_derecha.png"), (0f - 64), y, velocidad);
+			return vehiculo;
+		}
+		if(num < 75){
+			vehiculo = new Vehiculos(new Texture("furgoneta_derecha.png"), (0f - 64), y, velocidad);
+			return vehiculo;
+		}
+		if(num < 101){
+			vehiculo = new Vehiculos(new Texture("coche_derecha.png"), (0f - 64), y, velocidad);
+			return vehiculo;
+		}
+		return vehiculo;
 	}
 	
 	private void generarEnemigoArriba(){
@@ -297,35 +296,39 @@ public class SpriteManager {
 		
 		switch(carril){
 		case 1:
-			if(num < 20){
-				vehiculo = new Vehiculos(new Texture("autobus_izquierda.png"), 600, 490f, -velocidad);
-			}
-			else{
-				vehiculo = new Vehiculos(new Texture("coche_izquierda.png"), 600, 490f, -velocidad);
-			}
+			vehiculo = rellenarArriba(num, 490f);
 			break;
-			
 		case 2:
-			if(num < 20){
-				vehiculo = new Vehiculos(new Texture("autobus_izquierda.png"), 600, 550f, -velocidad);
-			}
-			else{
-				vehiculo = new Vehiculos(new Texture("coche_izquierda.png"), 600, 550f, -velocidad);
-			}
+			vehiculo = rellenarArriba(num, 550f);
 			break;
-			
 		case 3:
-			if(num < 20){
-				vehiculo = new Vehiculos(new Texture("autobus_izquierda.png"), 600, 610f, -velocidad);
-			}
-			else{
-				vehiculo = new Vehiculos(new Texture("coche_izquierda.png"), 600, 610f, -velocidad);
-			}
+			vehiculo = rellenarArriba(num, 610f);
 			break;
-		
 		}
 		vehiculos.add(vehiculo);
 		
+	}
+	
+	private Vehiculos rellenarArriba(int num, float y){
+		Vehiculos vehiculo = null;
+		
+		if(num < 25){
+			vehiculo = new Vehiculos(new Texture("autobus_izquierda.png"), 600, y, -velocidad);
+			return vehiculo;
+		}
+		if(num < 50){
+			vehiculo = new Vehiculos(new Texture("Camion_izquierda.png"), 600, y, -velocidad);
+			return vehiculo;
+		}
+		if(num < 75){
+			vehiculo = new Vehiculos(new Texture("furgoneta_izquierda.png"), 600, y, -velocidad);
+			return vehiculo;
+		}
+		if(num < 101){
+			vehiculo = new Vehiculos(new Texture("coche_izquierda.png"), 600, y, -velocidad);
+			return vehiculo;
+		}
+		return null;
 	}
 
 	private void generarTranvia(){
@@ -336,7 +339,7 @@ public class SpriteManager {
 		
 		switch(carril){
 		case 1:
-			vehiculo = new Vehiculos(new Texture("tranvia_derecha.png"), 0 - 256, 310f, 250f);
+			vehiculo = new Vehiculos(new Texture("tranvia_derecha.png"), 0 - 256, 300f, 250f);
 			break;
 			
 		case 2:
