@@ -6,15 +6,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 
 public class GameOver implements Screen{
 
 	Juego juego;
-	
+	private Texture fondo1;
+	private Texture fondo2;
 	
 	public GameOver(Juego juego){
 		
 		this.juego = juego;
+		
+		fondo1 = new Texture(Gdx.files.internal("fuegos.png"));
+		fondo2 = new Texture(Gdx.files.internal("ambulancia.png"));
 	}
 
 
@@ -25,11 +30,18 @@ public class GameOver implements Screen{
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		juego.batch.begin();
-		juego.font.draw(juego.batch, "Has conseguido " + juego.puntos + " puntos", 100, 160);
-		juego.font.draw(juego.batch, "Has conseguido cruzar con " + juego.salvados + " veces", 100, 130);
-		juego.font.draw(juego.batch, "Te han pillado " + juego.perdidos + " veces", 100, 100);
-		juego.font.draw(juego.batch, "Pulsa 'ENTER' para volver a jugar", 100, 70);
-		juego.font.draw(juego.batch, "Pulsa 'ESCAPE' para salir", 100, 40);
+		if(juego.puntos > 0){
+			juego.batch.draw(fondo1, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		}
+		else{
+			juego.batch.draw(fondo2, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		}
+		
+		juego.font.draw(juego.batch, "Has conseguido " + juego.puntos + " puntos", 30, 70);
+		juego.font.draw(juego.batch, "Has conseguido cruzar " + juego.salvados + " veces", 30, 50);
+		juego.font.draw(juego.batch, "Te han pillado " + juego.perdidos + " veces", 30, 30);
+		juego.font.draw(juego.batch, "Pulsa 'ENTER' para volver a jugar", 350, 60);
+		juego.font.draw(juego.batch, "Pulsa 'ESCAPE' para salir", 350, 40);
 		juego.batch.end();
 		
 		handleInput();

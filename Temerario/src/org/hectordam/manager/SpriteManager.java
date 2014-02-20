@@ -166,27 +166,27 @@ public class SpriteManager {
 				break;
 			case SEÑAL50:
 				personaje.setTipo(objeto.getTipo());
-				velocidad -= 25;
 				tiempoCoche += 80*cont;
 				for(Vehiculos vehiculo: vehiculos){
 					vehiculo.speed -= 25;
 				}
+				velocidad -= 25;
 				break;
 			case SEÑAL60:
 				personaje.setTipo(objeto.getTipo());
-				velocidad -= 20;
 				tiempoCoche += 60*cont;
 				for(Vehiculos vehiculo: vehiculos){
 					vehiculo.speed -= 20;
 				}
+				velocidad -= 20;
 				break;
 			case SEÑAL80:
 				personaje.setTipo(objeto.getTipo());
-				velocidad -= 10;
 				tiempoCoche += 30*cont;
 				for(Vehiculos vehiculo: vehiculos){
 					vehiculo.speed -= 10;
 				}
+				velocidad -= 10;
 				break;
 				default:
 				break;
@@ -268,12 +268,12 @@ public class SpriteManager {
 	private Vehiculos rellenarAbajo(int num, float y){
 		Vehiculos vehiculo = null;
 		
-		if(num < 25){
-			vehiculo = new Vehiculos(new Texture("autobus_derecha.png"), (0f - 64), y, velocidad);
+		if(num < 15){
+			vehiculo = new Vehiculos(new Texture("autobus2_derecha.png"), (0f - 64), y, velocidad);
 			return vehiculo;
 		}
 		if(num < 50){
-			vehiculo = new Vehiculos(new Texture("Camion_derecha.png"), (0f - 64), y, velocidad);
+			vehiculo = new Vehiculos(new Texture("coche_derecha.png"), (0f - 64), y, velocidad);
 			return vehiculo;
 		}
 		if(num < 75){
@@ -281,7 +281,7 @@ public class SpriteManager {
 			return vehiculo;
 		}
 		if(num < 101){
-			vehiculo = new Vehiculos(new Texture("coche_derecha.png"), (0f - 64), y, velocidad);
+			vehiculo = new Vehiculos(new Texture("Camion_derecha.png"), (0f - 64), y, velocidad);
 			return vehiculo;
 		}
 		return vehiculo;
@@ -312,12 +312,12 @@ public class SpriteManager {
 	private Vehiculos rellenarArriba(int num, float y){
 		Vehiculos vehiculo = null;
 		
-		if(num < 25){
-			vehiculo = new Vehiculos(new Texture("autobus_izquierda.png"), 600, y, -velocidad);
+		if(num < 15){
+			vehiculo = new Vehiculos(new Texture("autobus2_izquierda.png"), 600, y, -velocidad);
 			return vehiculo;
 		}
 		if(num < 50){
-			vehiculo = new Vehiculos(new Texture("Camion_izquierda.png"), 600, y, -velocidad);
+			vehiculo = new Vehiculos(new Texture("coche_izquierda.png"), 600, y, -velocidad);
 			return vehiculo;
 		}
 		if(num < 75){
@@ -325,7 +325,7 @@ public class SpriteManager {
 			return vehiculo;
 		}
 		if(num < 101){
-			vehiculo = new Vehiculos(new Texture("coche_izquierda.png"), 600, y, -velocidad);
+			vehiculo = new Vehiculos(new Texture("Camion_izquierda.png"), 600, y, -velocidad);
 			return vehiculo;
 		}
 		return null;
