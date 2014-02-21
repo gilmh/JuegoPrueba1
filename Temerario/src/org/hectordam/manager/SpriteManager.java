@@ -12,6 +12,8 @@ import org.hectordam.util.Util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -42,6 +44,10 @@ public class SpriteManager {
 	
 	Juego juego;
 	private Texture fondo;
+	Music musica;
+	Sound sonidoFreno;
+	Sound sonidoPito;
+	Sound sonidoBonus;
 	
 	public SpriteManager(Juego juego){
 		
@@ -50,6 +56,13 @@ public class SpriteManager {
 		vehiculos = new Array<Vehiculos>();
 		
 		fondo = new Texture(Gdx.files.internal("Carretera.png"));
+		musica = Gdx.audio.newMusic(Gdx.files.internal("musicafondo.mp3"));
+		sonidoFreno = Gdx.audio.newSound(Gdx.files.internal("freno.wav"));
+		sonidoPito = Gdx.audio.newSound(Gdx.files.internal("pito.wav"));
+		sonidoBonus = Gdx.audio.newSound(Gdx.files.internal("bonus.wav"));
+		
+		musica.setLooping(true);
+		musica.play();
 	}
 	
 	public void render(SpriteBatch batch) {
@@ -149,10 +162,17 @@ public class SpriteManager {
 				juego.puntos -= 20;
 				generarPersonaje();
 				cont += 1;
+				if(vehiculo.isTranvia()){
+					sonidoPito.play();
+				}
+				else{
+					sonidoFreno.play();
+				}
 			}
 		}
 		
 		if(personaje.rect.overlaps(objeto.rect) && bonus){
+			sonidoBonus.play();
 			juego.puntos += 10;
 			switch(objeto.getTipo()){
 			case RAYO:
@@ -262,6 +282,7 @@ public class SpriteManager {
 			vehiculo = rellenarAbajo(num, 240f);
 			break;
 		}
+		vehiculo.setTranvia(false);
 		vehiculos.add(vehiculo);
 	}
 	
@@ -305,6 +326,7 @@ public class SpriteManager {
 			vehiculo = rellenarArriba(num, 610f);
 			break;
 		}
+		vehiculo.setTranvia(false);
 		vehiculos.add(vehiculo);
 		
 	}
@@ -346,7 +368,7 @@ public class SpriteManager {
 			vehiculo = new Vehiculos(new Texture("tranvia_izquierda.png"), 600, 430f, -250f);
 			break;
 		}
-		
+		vehiculo.setTranvia(true);
 		vehiculos.add(vehiculo);
 	
 		ultimoTranvia = TimeUtils.millis();
