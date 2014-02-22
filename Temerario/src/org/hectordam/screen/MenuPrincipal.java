@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -14,11 +15,16 @@ public class MenuPrincipal implements Screen{
 	Juego juego;
 	
 	private Texture fondo;
+	Music musica;
 	
 	public MenuPrincipal(Juego juego){
 		
 		this.juego = juego;
 		fondo = new Texture(Gdx.files.internal("paramirapasa.png"));
+		musica = Gdx.audio.newMusic(Gdx.files.internal("musicafondo.mp3"));
+		
+		musica.setLooping(true);
+		musica.play();
 	}
 
 

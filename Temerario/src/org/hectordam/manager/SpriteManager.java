@@ -44,10 +44,10 @@ public class SpriteManager {
 	
 	Juego juego;
 	private Texture fondo;
-	Music musica;
 	Sound sonidoFreno;
 	Sound sonidoPito;
 	Sound sonidoBonus;
+	Sound sonidoCruce;
 	
 	public SpriteManager(Juego juego){
 		
@@ -56,13 +56,11 @@ public class SpriteManager {
 		vehiculos = new Array<Vehiculos>();
 		
 		fondo = new Texture(Gdx.files.internal("Carretera.png"));
-		musica = Gdx.audio.newMusic(Gdx.files.internal("musicafondo.mp3"));
 		sonidoFreno = Gdx.audio.newSound(Gdx.files.internal("freno.wav"));
 		sonidoPito = Gdx.audio.newSound(Gdx.files.internal("pito.wav"));
 		sonidoBonus = Gdx.audio.newSound(Gdx.files.internal("bonus.wav"));
+		sonidoCruce = Gdx.audio.newSound(Gdx.files.internal("Wololo.wav"));
 		
-		musica.setLooping(true);
-		musica.play();
 	}
 	
 	public void render(SpriteBatch batch) {
@@ -108,7 +106,7 @@ public class SpriteManager {
 		}
 		
 		if(personaje.posicion.y > 690){
-			
+			sonidoCruce.play();
 			juego.salvados += 1;
 			juego.puntos += 50;
 			generarPersonaje();
