@@ -1,5 +1,13 @@
 package org.hectordam.screen;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hectordam.temerario.Juego;
 
 import com.badlogic.gdx.Gdx;
@@ -14,12 +22,24 @@ public class GameOver implements Screen{
 	private Texture fondo1;
 	private Texture fondo2;
 	
+	Connection connection = null;
+	List<String> scores;
+	
 	public GameOver(Juego juego){
 		
 		this.juego = juego;
 		
 		fondo1 = new Texture(Gdx.files.internal("fuegos.png"));
 		fondo2 = new Texture(Gdx.files.internal("ambulancia.png"));
+		
+		conectarDatos();
+		try {
+			consulta();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 
@@ -35,6 +55,13 @@ public class GameOver implements Screen{
 		}
 		else{
 			juego.batch.draw(fondo2, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		}
+		
+		juego.font.draw(juego.batch, "Mejores puntuaciones ", 250, 500);
+		int pos = 470;
+		for(int i = 0; i < scores.size(); i++){
+			juego.font.draw(juego.batch, scores.get(i) + " puntos", 250, pos);
+			pos -= 20;
 		}
 		
 		juego.font.draw(juego.batch, "Has conseguido " + juego.puntos + " puntos", 30, 70);
@@ -61,6 +88,52 @@ public class GameOver implements Screen{
 			juego.puntos = 0;
 			juego.setScreen(new PantallaJuego(juego));
 		}
+	}
+	
+	private void conectarDatos(){
+		
+		try {
+			Class.forName("org.sqlite.JDBC");
+			
+			connection = DriverManager.getConnection("jdbc:sqlite:" + Gdx.files.internal("puntuaciones.db"));
+		
+			Statement statement = connection.createStatement();
+			statement.executeUpdate("CREATE TABLE IF NOT EXISTS puntuaciones (puntuacion int)");
+			statement.executeUpdate("INSERT INTO puntuaciones (puntuacion) VALUES (" + juego.puntos + ")");
+			
+			if (statement != null)
+				statement.close();
+			if (connection != null)
+				connection.close();
+		
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		
+	}
+	
+	private void consulta() throws SQLException, ClassNotFoundException{
+		
+		Class.forName("org.sqlite.JDBC");
+		
+		connection = DriverManager.getConnection("jdbc:sqlite:" + Gdx.files.internal("puntuaciones.db"));
+		
+		Statement statement = connection.createStatement();
+		ResultSet res = statement.executeQuery("SELECT puntuacion FROM puntuaciones ORDER BY puntuacion DESC LIMIT 5");
+		scores = new ArrayList<String>();
+
+		while (res.next()) {
+			scores.add(Integer.toString(res.getInt("puntuacion")));
+		}
+		
+		if (statement != null)
+			statement.close();
+		if (res != null)
+			res.close();
+		if (connection != null)
+			connection.close();
 	}
 	
 	@Override
