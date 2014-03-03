@@ -3,6 +3,7 @@ package org.hectordam.temerario;
 import org.hectordam.screen.MenuPrincipal;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -16,7 +17,7 @@ public class Juego extends Game {
 	
 	public int salvados = 0;
 	public int perdidos = 0;
-	public float tiempo = 5;
+	public float tiempo = 100;
 	public int puntos = 0;
 	
 	@Override
@@ -24,6 +25,7 @@ public class Juego extends Game {
 		
 		batch = new SpriteBatch();
 		font = new BitmapFont();
+		font.setColor(Color.GREEN);
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, 600, 720);
 		camera.update();
