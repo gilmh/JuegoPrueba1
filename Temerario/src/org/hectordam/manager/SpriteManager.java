@@ -217,7 +217,22 @@ public class SpriteManager {
 	
 	private void generarPersonaje(){
 		
-		personaje = new Personajes(new Texture("abajo1.png"), 300 - 16, 10, velocidadPersonaje);
+		int num = (int) (Math.random()*3+1);
+		
+		switch(num){
+		case 1:
+			personaje = new Personajes(new Texture("abajo1.png"), 300 - 16, 10, velocidadPersonaje, num);
+			break;
+		case 2:
+			personaje = new Personajes(new Texture("abajo1-2.png"), 300 - 16, 10, velocidadPersonaje - 10, num);
+			break;
+		case 3:
+			personaje = new Personajes(new Texture("abajo1-3.png"), 300 - 16, 10, velocidadPersonaje + 20, num);
+			break;
+			default:
+				break;
+		}
+		
 	}
 	
 	private void generarObjetos(){
